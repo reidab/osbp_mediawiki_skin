@@ -11,7 +11,7 @@
  */
 
 if( !defined( 'MEDIAWIKI' ) )
-	die( -1 );
+   die( -1 );
 
 /**
  * Inherit main code from SkinTemplate, set the CSS and template filter.
@@ -19,36 +19,36 @@ if( !defined( 'MEDIAWIKI' ) )
  * @ingroup Skins
  */
 class SkinOSBridge extends SkinTemplate {
-	/** Using osbridge. */
-	function initPage( OutputPage $out ) {
-		parent::initPage( $out );
-		$this->skinname  = 'osbridge';
-		$this->stylename = 'osbridge';
-		$this->template  = 'OSBridgeTemplate';
+   /** Using osbridge. */
+   function initPage( OutputPage $out ) {
+      parent::initPage( $out );
+      $this->skinname  = 'osbridge';
+      $this->stylename = 'osbridge';
+      $this->template  = 'OSBridgeTemplate';
 
-	}
+   }
 
-	function setupSkinUserCss( OutputPage $out ) {
-		global $wgHandheldStyle;
+   function setupSkinUserCss( OutputPage $out ) {
+      global $wgHandheldStyle;
 
-		parent::setupSkinUserCss( $out );
-      
+      parent::setupSkinUserCss( $out );
+
       $out->addStyle( 'http://opensourcebridge.org/common/osbp_common_v3.css', 'screen', '', '');
-      
-		// Append to the default screen common & print styles...
-      $out->addStyle( 'osbridge/main.css', 'screen' );
-		if( $wgHandheldStyle ) {
-			// Currently in testing... try 'chick/main.css'
-			$out->addStyle( $wgHandheldStyle, 'handheld' );
-		}
 
-		// $out->addStyle( 'osbridge/IE50Fixes.css', 'screen', 'lt IE 5.5000' );
-		//     $out->addStyle( 'osbridge/IE55Fixes.css', 'screen', 'IE 5.5000' );
-		//     $out->addStyle( 'osbridge/IE60Fixes.css', 'screen', 'IE 6' );
-		//     $out->addStyle( 'osbridge/IE70Fixes.css', 'screen', 'IE 7' );
-		// 
-		//     $out->addStyle( 'osbridge/rtl.css', 'screen', '', 'rtl' );
-	}
+      // Append to the default screen common & print styles...
+      $out->addStyle( 'osbridge/main.css', 'screen' );
+      if( $wgHandheldStyle ) {
+         // Currently in testing... try 'chick/main.css'
+         $out->addStyle( $wgHandheldStyle, 'handheld' );
+      }
+
+      // $out->addStyle( 'osbridge/IE50Fixes.css', 'screen', 'lt IE 5.5000' );
+      //     $out->addStyle( 'osbridge/IE55Fixes.css', 'screen', 'IE 5.5000' );
+      //     $out->addStyle( 'osbridge/IE60Fixes.css', 'screen', 'IE 6' );
+      //     $out->addStyle( 'osbridge/IE70Fixes.css', 'screen', 'IE 7' );
+      //
+      //     $out->addStyle( 'osbridge/rtl.css', 'screen', '', 'rtl' );
+   }
 }
 
 /**
@@ -56,66 +56,66 @@ class SkinOSBridge extends SkinTemplate {
  * @ingroup Skins
  */
 class OSBridgeTemplate extends QuickTemplate {
-	var $skin;
-	/**
-	 * Template filter callback for OSBridge skin.
-	 * Takes an associative array of data set from a SkinTemplate-based
-	 * class, and a wrapper for MediaWiki's localization database, and
-	 * outputs a formatted page.
-	 *
-	 * @access private
-	 */
-	function execute() {
-		global $wgRequest;
-		$this->skin = $skin = $this->data['skin'];
-		$action = $wgRequest->getText( 'action' );
+   var $skin;
+   /**
+    * Template filter callback for OSBridge skin.
+    * Takes an associative array of data set from a SkinTemplate-based
+    * class, and a wrapper for MediaWiki's localization database, and
+    * outputs a formatted page.
+    *
+    * @access private
+    */
+   function execute() {
+      global $wgRequest;
+      $this->skin = $skin = $this->data['skin'];
+      $action = $wgRequest->getText( 'action' );
 
-		// Suppress warnings to prevent notices about missing indexes in $this->data
-		wfSuppressWarnings();
+      // Suppress warnings to prevent notices about missing indexes in $this->data
+      wfSuppressWarnings();
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="<?php $this->text('xhtmldefaultnamespace') ?>" <?php
-	foreach($this->data['xhtmlnamespaces'] as $tag => $ns) {
-		?>xmlns:<?php echo "{$tag}=\"{$ns}\" ";
-	} ?>xml:lang="<?php $this->text('lang') ?>" lang="<?php $this->text('lang') ?>" dir="<?php $this->text('dir') ?>">
-	<head>
-		<meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
-		<?php $this->html('headlinks') ?>
-		<title><?php $this->text('pagetitle') ?></title>
-		<?php $this->html('csslinks') ?>
+   foreach($this->data['xhtmlnamespaces'] as $tag => $ns) {
+      ?>xmlns:<?php echo "{$tag}=\"{$ns}\" ";
+   } ?>xml:lang="<?php $this->text('lang') ?>" lang="<?php $this->text('lang') ?>" dir="<?php $this->text('dir') ?>">
+   <head>
+      <meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
+      <?php $this->html('headlinks') ?>
+      <title><?php $this->text('pagetitle') ?></title>
+      <?php $this->html('csslinks') ?>
 
-		<!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"></script>
-		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+      <!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"></script>
+      <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
 
-		<?php print Skin::makeGlobalVariablesScript( $this->data ); ?>
+      <?php print Skin::makeGlobalVariablesScript( $this->data ); ?>
 
-		<script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath' ) ?>/common/wikibits.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"><!-- wikibits js --></script>
-		<!-- Head Scripts -->
+      <script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath' ) ?>/common/wikibits.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"><!-- wikibits js --></script>
+      <!-- Head Scripts -->
 <?php $this->html('headscripts') ?>
-<?php	if($this->data['jsvarurl']) { ?>
-		<script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('jsvarurl') ?>"><!-- site js --></script>
-<?php	} ?>
-<?php	if($this->data['pagecss']) { ?>
-		<style type="text/css"><?php $this->html('pagecss') ?></style>
-<?php	}
-		if($this->data['usercss']) { ?>
-		<style type="text/css"><?php $this->html('usercss') ?></style>
-<?php	}
-		if($this->data['userjs']) { ?>
-		<script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('userjs' ) ?>"></script>
-<?php	}
-		if($this->data['userjsprev']) { ?>
-		<script type="<?php $this->text('jsmimetype') ?>"><?php $this->html('userjsprev') ?></script>
-<?php	}
-		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
-	</head>
+<?php if($this->data['jsvarurl']) { ?>
+      <script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('jsvarurl') ?>"><!-- site js --></script>
+<?php } ?>
+<?php if($this->data['pagecss']) { ?>
+      <style type="text/css"><?php $this->html('pagecss') ?></style>
+<?php }
+      if($this->data['usercss']) { ?>
+      <style type="text/css"><?php $this->html('usercss') ?></style>
+<?php }
+      if($this->data['userjs']) { ?>
+      <script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('userjs' ) ?>"></script>
+<?php }
+      if($this->data['userjsprev']) { ?>
+      <script type="<?php $this->text('jsmimetype') ?>"><?php $this->html('userjsprev') ?></script>
+<?php }
+      if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
+   </head>
 <body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
  class="mediawiki <?php $this->text('dir') ?> <?php $this->text('pageclass') ?> <?php $this->text('skinnameclass') ?>">
-	<div id="wrapper">
-	   <div id="header">
-	      <div class='inner_container'>
-	         <h1 id="site-title"><span><a href='/'>Open Source Bridge</a></span></h1>
+   <div id="wrapper">
+      <div id="header">
+         <div class='inner_container'>
+            <h1 id="site-title"><span><a href='/'>Open Source Bridge</a></span></h1>
             <div id="site-description">
                <h2>The conference for open source citizens</h2>
                <p id='conference-date-location'>June 17&ndash;19, 2009 <span class='separator'>|</span> Portland, Oregon</p>
@@ -123,7 +123,7 @@ class OSBridgeTemplate extends QuickTemplate {
             <a href='/attend' title='Early bird discount ends April 10th. Register today!' id="header-reg-now">Register now and save!</a>
          </div>
        </div>
-       
+
        <div id="access">
         <div class="skip-link">
           <a href="#content" title="Skip to content">Skip to content</a>
@@ -136,16 +136,17 @@ class OSBridgeTemplate extends QuickTemplate {
                 <li><a href='/sessions/' title='Sessions' class=''>Sessions</a></li>
                 <li><a href="/volunteer/" title="Volunteer">Get Involved</a></li>
                 <li><a href="/sponsors/" title="Sponsors">Sponsors</a></li>
-                <li><a href="/">Blog</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/wiki/" class="current_page_item">Wiki</a></li>
              </ul>
           </div>
 
           <div id="subnav" class='navbar'>
              <div class='inner_container'>
                 <h2>Attendee Wiki</h2>
-                
+
                 <ul>
-                   <?php		foreach($this->data['content_actions'] as $key => $tab) {
+                   <?php      foreach($this->data['content_actions'] as $key => $tab) {
                       echo '
                       <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
                    if( $tab['class'] ) {
@@ -227,7 +228,7 @@ class OSBridgeTemplate extends QuickTemplate {
                      <?php if($this->data['copyrightico']) { ?>
                      <li><div id="f-copyrightico"><?php $this->html('copyrightico') ?></div></li>
                      <?php } ?>
-                     
+
                      <?php
                      // Generate additional footer links
                      $footerlinks = array(
@@ -266,129 +267,129 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php endif; ?>
 </body></html>
 <?php
-	wfRestoreWarnings();
-	} // end of execute() method
+   wfRestoreWarnings();
+   } // end of execute() method
 
-	/*************************************************************************************************/
-	function searchBox() {
+   /*************************************************************************************************/
+   function searchBox() {
 ?>
-	<li id="p-search" class="portlet">
-		<h3><label for="searchInput"><?php $this->msg('search') ?></label></h3>
-		<div id="searchBody" class="pBody">
-			<form action="<?php $this->text('searchaction') ?>" id="searchform"><div>
-				<input id="searchInput" name="search" type="text"<?php echo $this->skin->tooltipAndAccesskey('search');
-					if( isset( $this->data['search'] ) ) {
-						?> value="<?php $this->text('search') ?>"<?php } ?> />
-				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="<?php $this->msg('searcharticle') ?>"<?php echo $this->skin->tooltipAndAccesskey( 'search-go' ); ?> />&nbsp;
-				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="<?php $this->msg('searchbutton') ?>"<?php echo $this->skin->tooltipAndAccesskey( 'search-fulltext' ); ?> />
-			</div></form>
-		</div>
-	</li>
+   <li id="p-search" class="portlet">
+      <h3><label for="searchInput"><?php $this->msg('search') ?></label></h3>
+      <div id="searchBody" class="pBody">
+         <form action="<?php $this->text('searchaction') ?>" id="searchform"><div>
+            <input id="searchInput" name="search" type="text"<?php echo $this->skin->tooltipAndAccesskey('search');
+               if( isset( $this->data['search'] ) ) {
+                  ?> value="<?php $this->text('search') ?>"<?php } ?> />
+            <input type='submit' name="go" class="searchButton" id="searchGoButton" value="<?php $this->msg('searcharticle') ?>"<?php echo $this->skin->tooltipAndAccesskey( 'search-go' ); ?> />&nbsp;
+            <input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="<?php $this->msg('searchbutton') ?>"<?php echo $this->skin->tooltipAndAccesskey( 'search-fulltext' ); ?> />
+         </div></form>
+      </div>
+   </li>
 <?php
-	}
+   }
 
-	/*************************************************************************************************/
-	function toolbox() {
+   /*************************************************************************************************/
+   function toolbox() {
 ?>
-	<li class="portlet" id="p-tb">
-		<h3><?php $this->msg('toolbox') ?></h3>
-		<div class="pBody">
-			<ul>
+   <li class="portlet" id="p-tb">
+      <h3><?php $this->msg('toolbox') ?></h3>
+      <div class="pBody">
+         <ul>
 <?php
-		if($this->data['notspecialpage']) { ?>
-				<li id="t-whatlinkshere"><a href="<?php
-				echo htmlspecialchars($this->data['nav_urls']['whatlinkshere']['href'])
-				?>"<?php echo $this->skin->tooltipAndAccesskey('t-whatlinkshere') ?>><?php $this->msg('whatlinkshere') ?></a></li>
+      if($this->data['notspecialpage']) { ?>
+            <li id="t-whatlinkshere"><a href="<?php
+            echo htmlspecialchars($this->data['nav_urls']['whatlinkshere']['href'])
+            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-whatlinkshere') ?>><?php $this->msg('whatlinkshere') ?></a></li>
 <?php
-			if( $this->data['nav_urls']['recentchangeslinked'] ) { ?>
-				<li id="t-recentchangeslinked"><a href="<?php
-				echo htmlspecialchars($this->data['nav_urls']['recentchangeslinked']['href'])
-				?>"<?php echo $this->skin->tooltipAndAccesskey('t-recentchangeslinked') ?>><?php $this->msg('recentchangeslinked') ?></a></li>
-<?php 		}
-		}
-		if(isset($this->data['nav_urls']['trackbacklink'])) { ?>
-			<li id="t-trackbacklink"><a href="<?php
-				echo htmlspecialchars($this->data['nav_urls']['trackbacklink']['href'])
-				?>"<?php echo $this->skin->tooltipAndAccesskey('t-trackbacklink') ?>><?php $this->msg('trackbacklink') ?></a></li>
-<?php 	}
-		if($this->data['feeds']) { ?>
-			<li id="feedlinks"><?php foreach($this->data['feeds'] as $key => $feed) {
-					?><span id="<?php echo Sanitizer::escapeId( "feed-$key" ) ?>"><a href="<?php
-					echo htmlspecialchars($feed['href']) ?>"<?php echo $this->skin->tooltipAndAccesskey('feed-'.$key) ?>><?php echo htmlspecialchars($feed['text'])?></a>&nbsp;</span>
-					<?php } ?></li><?php
-		}
+         if( $this->data['nav_urls']['recentchangeslinked'] ) { ?>
+            <li id="t-recentchangeslinked"><a href="<?php
+            echo htmlspecialchars($this->data['nav_urls']['recentchangeslinked']['href'])
+            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-recentchangeslinked') ?>><?php $this->msg('recentchangeslinked') ?></a></li>
+<?php       }
+      }
+      if(isset($this->data['nav_urls']['trackbacklink'])) { ?>
+         <li id="t-trackbacklink"><a href="<?php
+            echo htmlspecialchars($this->data['nav_urls']['trackbacklink']['href'])
+            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-trackbacklink') ?>><?php $this->msg('trackbacklink') ?></a></li>
+<?php    }
+      if($this->data['feeds']) { ?>
+         <li id="feedlinks"><?php foreach($this->data['feeds'] as $key => $feed) {
+               ?><span id="<?php echo Sanitizer::escapeId( "feed-$key" ) ?>"><a href="<?php
+               echo htmlspecialchars($feed['href']) ?>"<?php echo $this->skin->tooltipAndAccesskey('feed-'.$key) ?>><?php echo htmlspecialchars($feed['text'])?></a>&nbsp;</span>
+               <?php } ?></li><?php
+      }
 
-		foreach( array('contributions', 'log', 'blockip', 'emailuser', 'upload', 'specialpages') as $special ) {
+      foreach( array('contributions', 'log', 'blockip', 'emailuser', 'upload', 'specialpages') as $special ) {
 
-			if($this->data['nav_urls'][$special]) {
-				?><li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
-				?>"<?php echo $this->skin->tooltipAndAccesskey('t-'.$special) ?>><?php $this->msg($special) ?></a></li>
-<?php		}
-		}
+         if($this->data['nav_urls'][$special]) {
+            ?><li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
+            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-'.$special) ?>><?php $this->msg($special) ?></a></li>
+<?php    }
+      }
 
-		if(!empty($this->data['nav_urls']['print']['href'])) { ?>
-				<li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
-				?>"<?php echo $this->skin->tooltipAndAccesskey('t-print') ?>><?php $this->msg('printableversion') ?></a></li><?php
-		}
+      if(!empty($this->data['nav_urls']['print']['href'])) { ?>
+            <li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
+            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-print') ?>><?php $this->msg('printableversion') ?></a></li><?php
+      }
 
-		if(!empty($this->data['nav_urls']['permalink']['href'])) { ?>
-				<li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
-				?>"<?php echo $this->skin->tooltipAndAccesskey('t-permalink') ?>><?php $this->msg('permalink') ?></a></li><?php
-		} elseif ($this->data['nav_urls']['permalink']['href'] === '') { ?>
-				<li id="t-ispermalink"<?php echo $this->skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
-		}
+      if(!empty($this->data['nav_urls']['permalink']['href'])) { ?>
+            <li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
+            ?>"<?php echo $this->skin->tooltipAndAccesskey('t-permalink') ?>><?php $this->msg('permalink') ?></a></li><?php
+      } elseif ($this->data['nav_urls']['permalink']['href'] === '') { ?>
+            <li id="t-ispermalink"<?php echo $this->skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
+      }
 
-		wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
-		wfRunHooks( 'SkinTemplateToolboxEnd', array( &$this ) );
+      wfRunHooks( 'MonoBookTemplateToolboxEnd', array( &$this ) );
+      wfRunHooks( 'SkinTemplateToolboxEnd', array( &$this ) );
 ?>
-			</ul>
-		</div>
-	</li>
+         </ul>
+      </div>
+   </li>
 <?php
-	}
+   }
 
-	/*************************************************************************************************/
-	function languageBox() {
-		if( $this->data['language_urls'] ) {
+   /*************************************************************************************************/
+   function languageBox() {
+      if( $this->data['language_urls'] ) {
 ?>
-	<li id="p-lang" class="portlet">
-		<h3><?php $this->msg('otherlanguages') ?></h3>
-		<div class="pBody">
-			<ul>
-<?php		foreach($this->data['language_urls'] as $langlink) { ?>
-				<li class="<?php echo htmlspecialchars($langlink['class'])?>"><?php
-				?><a href="<?php echo htmlspecialchars($langlink['href']) ?>"><?php echo $langlink['text'] ?></a></li>
-<?php		} ?>
-			</ul>
-		</div>
-	</li>
+   <li id="p-lang" class="portlet">
+      <h3><?php $this->msg('otherlanguages') ?></h3>
+      <div class="pBody">
+         <ul>
+<?php    foreach($this->data['language_urls'] as $langlink) { ?>
+            <li class="<?php echo htmlspecialchars($langlink['class'])?>"><?php
+            ?><a href="<?php echo htmlspecialchars($langlink['href']) ?>"><?php echo $langlink['text'] ?></a></li>
+<?php    } ?>
+         </ul>
+      </div>
+   </li>
 <?php
-		}
-	}
+      }
+   }
 
-	/*************************************************************************************************/
-	function customBox( $bar, $cont ) {
+   /*************************************************************************************************/
+   function customBox( $bar, $cont ) {
 ?>
-	<li class='generated-sidebar portlet' id='<?php echo Sanitizer::escapeId( "p-$bar" ) ?>'<?php echo $this->skin->tooltip('p-'.$bar) ?>>
-		<h3><?php $out = wfMsg( $bar ); if (wfEmptyMsg($bar, $out)) echo $bar; else echo $out; ?></h3>
-		<div class='pBody'>
+   <li class='generated-sidebar portlet' id='<?php echo Sanitizer::escapeId( "p-$bar" ) ?>'<?php echo $this->skin->tooltip('p-'.$bar) ?>>
+      <h3><?php $out = wfMsg( $bar ); if (wfEmptyMsg($bar, $out)) echo $bar; else echo $out; ?></h3>
+      <div class='pBody'>
 <?php   if ( is_array( $cont ) ) { ?>
-			<ul>
-<?php 			foreach($cont as $key => $val) { ?>
-				<li id="<?php echo Sanitizer::escapeId($val['id']) ?>"<?php
-					if ( $val['active'] ) { ?> class="active" <?php }
-				?>><a href="<?php echo htmlspecialchars($val['href']) ?>"<?php echo $this->skin->tooltipAndAccesskey($val['id']) ?>><?php echo htmlspecialchars($val['text']) ?></a></li>
-<?php			} ?>
-			</ul>
+         <ul>
+<?php          foreach($cont as $key => $val) { ?>
+            <li id="<?php echo Sanitizer::escapeId($val['id']) ?>"<?php
+               if ( $val['active'] ) { ?> class="active" <?php }
+            ?>><a href="<?php echo htmlspecialchars($val['href']) ?>"<?php echo $this->skin->tooltipAndAccesskey($val['id']) ?>><?php echo htmlspecialchars($val['text']) ?></a></li>
+<?php       } ?>
+         </ul>
 <?php   } else {
-			# allow raw HTML block to be defined by extensions
-			print $cont;
-		}
+         # allow raw HTML block to be defined by extensions
+         print $cont;
+      }
 ?>
-		</div>
-	</li>
+      </div>
+   </li>
 <?php
-	}
+   }
 
 } // end of class
 
