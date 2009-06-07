@@ -9,6 +9,8 @@
  * @file
  * @ingroup Skins
  */
+global $admin_sidebar_actions;
+$admin_sidebar_actions = array('delete', 'move', 'protect');
 
 if( !defined( 'MEDIAWIKI' ) )
    die( -1 );
@@ -137,16 +139,17 @@ class OSBridgeTemplate extends QuickTemplate {
                 <li><a href="/volunteer/" title="Volunteer">Get Involved</a></li>
                 <li><a href="/sponsors/" title="Sponsors">Sponsors</a></li>
                 <li><a href="/blog/">Blog</a></li>
-                <li><a href="/wiki/" class="current_page_item">Wiki</a></li>
+                <li class="current_page_item"><a href="/wiki/">Wiki</a></li>
              </ul>
           </div>
 
           <div id="subnav" class='navbar'>
              <div class='inner_container'>
                 <h2>Attendee Wiki</h2>
-
+                <?php global $admin_sidebar_actions; ?>
                 <ul>
-                   <?php      foreach($this->data['content_actions'] as $key => $tab) {
+                   <?php      
+                   foreach(array_diff_key($this->data['content_actions'], array_flip( $admin_sidebar_actions )) as $key => $tab) {
                       echo '
                       <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
                    if( $tab['class'] ) {
@@ -205,6 +208,39 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php             } ?>
                   </ul>
                </li>
+               <?php
+               $admin_sidebar_menu = array_intersect_key($this->data['content_actions'], array_flip( $admin_sidebar_actions ));
+
+               if(count($admin_sidebar_menu) > 0) {
+               ?>
+               <li class='portlet'>
+                 <h3>Management</h3>
+                 <ul>
+                    <?php
+                    foreach($admin_sidebar_menu as $key => $tab) {
+                       echo '
+                       <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
+                    if( $tab['class'] ) {
+                       echo ' class="'.htmlspecialchars($tab['class']).'"';
+                    }
+                    echo'><a href="'.htmlspecialchars($tab['href']).'"';
+                    # We don't want to give the watch tab an accesskey if the
+                    # page is being edited, because that conflicts with the
+                    # accesskey on the watch checkbox.  We also don't want to
+                    # give the edit tab an accesskey, because that's fairly su-
+                    # perfluous and conflicts with an accesskey (Ctrl-E) often
+                    # used for editing in Safari.
+                    if( in_array( $action, array( 'edit', 'submit' ) )
+                    && in_array( $key, array( 'edit', 'watch', 'unwatch' ))) {
+                       echo $skin->tooltip( "ca-$key" );
+                    } else {
+                       echo $skin->tooltipAndAccesskey( "ca-$key" );
+                    }
+                    echo '>'.htmlspecialchars($tab['text']).'</a></li>';
+                    } ?>
+                 </ul>
+               </li>
+               <?php } ?>
 
 <?php
                $sidebar = $this->data['sidebar'];
