@@ -120,7 +120,7 @@ class OSBridgeTemplate extends QuickTemplate {
             <h1 id="site-title"><span><a href='/'>Open Source Bridge</a></span></h1>
             <div id="site-description">
                <h2>The conference for open source citizens</h2>
-               <p id='conference-date-location'>June 17&ndash;19, 2009 <span class='separator'>|</span> Portland, Oregon</p>
+               <p id='conference-date-location'>June 1&ndash;4, 2010 <span class='separator'>|</span> Portland, Oregon</p>
             </div>
          </div>
        </div>
