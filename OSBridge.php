@@ -225,6 +225,12 @@ class OSBridgeTemplate extends QuickTemplate {
               }
               echo '>'.htmlspecialchars($tab['text']).'</a></li>';
               } ?>
+
+              <?php # OSBRIDGE: Add an upload link here rather than in the silly Toolbox ?>
+              <?php $special = 'upload'; ?>
+              <li id="t-<?php echo $special ?>"><a href="<?php echo htmlspecialchars($this->data['nav_urls'][$special]['href'])
+        ?>"<?php echo $this->skin->tooltipAndAccesskey('t-'.$special) ?>><?php $this->msg($special) ?></a></li>
+              <?php $special = Nil; ?>
             </ul>
           </li>
           <?php } ?>
