@@ -131,7 +131,12 @@ class OSBridgeTemplate extends QuickTemplate {
         <?php global $admin_sidebar_actions; ?>
         <ul>
           <?php
+          # OSBRIDGE: Only show these actions
+          $include_content_actions = array('edit', 'history', 'watch');
           foreach(array_diff_key($this->data['content_actions'], array_flip( $admin_sidebar_actions )) as $key => $tab) {
+            # echo "KEY($key)"; # Uncomment to show action names
+            # OSBRIDGE: Skip unwanted actions
+            if (! in_array($key, $include_content_actions)) continue;
             echo '
               <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
             if( $tab['class'] ) {
