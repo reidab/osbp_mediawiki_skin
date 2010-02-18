@@ -114,6 +114,7 @@ class OSBridgeTemplate extends QuickTemplate {
     <script type="<?php $this->text('jsmimetype') ?>"><?php $this->html('userjsprev') ?></script>
 <?php }
     if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
+    <script src="<?php echo $this->text('stylepath'); ?>/osbridge/jquery.min.js" type="text/javascript" charset="utf-8"></script>
   </head>
 <body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
