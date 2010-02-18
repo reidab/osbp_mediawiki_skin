@@ -316,7 +316,7 @@ class OSBridgeTemplate extends QuickTemplate {
   function searchBox() {
 ?>
   <li id="p-search" class="portlet">
-    <h3><label for="searchInput"><?php $this->msg('search') ?></label></h3>
+    <h3><label for="searchInput">Search Wiki</label></h3>
     <div id="searchBody" class="pBody">
       <form action="<?php $this->text('searchaction') ?>" id="searchform"><div>
         <input id="searchInput" name="search" type="text"<?php echo $this->skin->tooltipAndAccesskey('search');
