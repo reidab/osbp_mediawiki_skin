@@ -369,7 +369,8 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php   }
     }
 
-    if(!empty($this->data['nav_urls']['print']['href'])) { ?>
+    # OSBRIDGE: Never show "Show printable version"
+    if(false and !empty($this->data['nav_urls']['print']['href'])) { ?>
         <li id="t-print"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['print']['href'])
         ?>"<?php echo $this->skin->tooltipAndAccesskey('t-print') ?>><?php $this->msg('printableversion') ?></a></li><?php
     }
