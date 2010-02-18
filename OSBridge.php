@@ -339,6 +339,8 @@ class OSBridgeTemplate extends QuickTemplate {
 
   /*************************************************************************************************/
   function toolbox() {
+    # OSBRIDGE: Only show toolbox to privileged users
+    if (! $this->isPrivileged()) return;
 ?>
   <li class="portlet" id="p-tb">
     <h3><?php $this->msg('toolbox') ?></h3>
