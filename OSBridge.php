@@ -442,6 +442,14 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php
   }
 
+  /*************************************************************************************************/
+  # Does this user have special privileges? True if they're a sysop or bureaucrat.
+  function isPrivileged() {
+    $user = $this->skin->mUser;
+    if (! $user) return(false);
+    $groups = $user->getGroups();
+    return(in_array('sysop', $groups) || in_array('bureaucrat', $groups));
+  }
 } // end of class
 
 
