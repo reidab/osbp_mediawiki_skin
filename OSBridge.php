@@ -180,18 +180,19 @@ class OSBridgeTemplate extends QuickTemplate {
         </div>
       </div>
       <div class='sidebar'>
+        <!-- User profile and actions -->
         <ul class="xoxo">
           <li class="portlet" id="p-personal">
             <h3><?php $this->msg('personaltools') ?></h3>
             <ul>
-<?php           foreach($this->data['personal_urls'] as $key => $item) { ?>
+<?php         foreach($this->data['personal_urls'] as $key => $item) { ?>
                 <li id="<?php echo Sanitizer::escapeId( "pt-$key" ) ?>"<?php
                 if ($item['active']) { ?> class="active"<?php } ?>><a href="<?php
                 echo htmlspecialchars($item['href']) ?>"<?php echo $skin->tooltipAndAccesskey('pt-'.$key) ?><?php
                 if(!empty($item['class'])) { ?> class="<?php
                 echo htmlspecialchars($item['class']) ?>"<?php } ?>><?php
                 echo htmlspecialchars($item['text']) ?></a></li>
-<?php           } ?>
+<?php         } ?>
             </ul>
           </li>
           <?php
