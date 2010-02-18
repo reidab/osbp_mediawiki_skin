@@ -242,15 +242,21 @@ class OSBridgeTemplate extends QuickTemplate {
           if ( !isset( $sidebar['LANGUAGES'] ) ) $sidebar['LANGUAGES'] = true;
           foreach ($sidebar as $boxName => $cont) {
             if ( $boxName == 'SEARCH' ) {
+              continue;
               $this->searchBox();
             } elseif ( $boxName == 'TOOLBOX' ) {
+              continue;
               $this->toolbox();
             } elseif ( $boxName == 'LANGUAGES' ) {
+              continue;
               $this->languageBox();
             } else {
               $this->customBox( $boxName, $cont );
             }
           }
+          # OSBRIDGE: Always show these, ignoring the settings above
+          $this->toolbox();
+          $this->searchBox();
 ?>
           <li>
             <ul>
