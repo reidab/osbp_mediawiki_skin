@@ -253,10 +253,9 @@ class OSBridgeTemplate extends QuickTemplate {
 
               <?php
               // Generate additional footer links
-              $footerlinks = array(
-                'lastmod', 'viewcount', 'numberofwatchingusers', 'credits', 'copyright',
-                'privacy', 'about', 'disclaimer', 'tagline',
-                );
+              # ORIGINAL: $footerlinks = array('lastmod', 'viewcount', 'numberofwatchingusers', 'credits', 'copyright', 'privacy', 'about', 'disclaimer', 'tagline');
+              # OSBRIDGE: Only display some footer links:
+              $footerlinks = array('lastmod', 'viewcount');
               $validFooterLinks = array();
               foreach( $footerlinks as $aLink ) {
                 if( isset( $this->data[$aLink] ) && $this->data[$aLink] ) {
