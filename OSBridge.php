@@ -35,7 +35,11 @@ class SkinOSBridge extends SkinTemplate {
 
     parent::setupSkinUserCss( $out );
 
-    $out->addStyle( 'http://opensourcebridge.org/common/osbp_common_v3.css', 'screen', '', '');
+    // Use CSS from either production server or from a local override.
+    $my_common_styles_url_file = dirname(__FILE__) . "/my_common_styles_url.txt";
+    $out->addStyle(file_exists($my_common_styles_url_file) ?
+      file_get_contents($my_common_styles_url_file) : 
+      'http://opensourcebridge.org/common/osbp_common_v3.css');
 
     // Append to the default screen common & print styles...
     $out->addStyle( 'osbridge/main.css', 'screen' );
