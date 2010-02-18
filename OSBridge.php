@@ -128,42 +128,48 @@ class OSBridgeTemplate extends QuickTemplate {
     <div id="subnav" class='navbar'>
       <div class='inner_container'>
         <h2>Attendee Wiki</h2>
-        <?php global $admin_sidebar_actions; ?>
-        <ul>
-          <?php
-          # OSBRIDGE: Only show these actions
-          $include_content_actions = array('edit', 'history', 'watch');
-          foreach(array_diff_key($this->data['content_actions'], array_flip( $admin_sidebar_actions )) as $key => $tab) {
-            # echo "KEY($key)"; # Uncomment to show action names
-            # OSBRIDGE: Skip unwanted actions
-            if (! in_array($key, $include_content_actions)) continue;
-            echo '
-              <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
-            if( $tab['class'] ) {
-              echo ' class="'.htmlspecialchars($tab['class']).'"';
-            }
-            echo'><a href="'.htmlspecialchars($tab['href']).'"';
-            # We don't want to give the watch tab an accesskey if the
-            # page is being edited, because that conflicts with the
-            # accesskey on the watch checkbox.  We also don't want to
-            # give the edit tab an accesskey, because that's fairly su-
-            # perfluous and conflicts with an accesskey (Ctrl-E) often
-            # used for editing in Safari.
-            if( in_array( $action, array( 'edit', 'submit' ) )
-                 && in_array( $key, array( 'edit', 'watch', 'unwatch' ))) {
-              echo $skin->tooltip( "ca-$key" );
-            } else {
-              echo $skin->tooltipAndAccesskey( "ca-$key" );
-            }
-            echo '>'.htmlspecialchars($tab['text']).'</a></li>';
-          } ?>
-        </ul>
       </div>
     </div>
     <div id="container">
       <div id="content">
         <a name="top" id="top"></a>
         <?php if($this->data['sitenotice']) { ?><div id="siteNotice"><?php $this->html('sitenotice') ?></div><?php } ?>
+
+        <!-- page controls -->
+        <?php global $admin_sidebar_actions; ?>
+        <div id="content-actions">
+          <ul>
+            <?php
+            # OSBRIDGE: Only show these actions
+            $include_content_actions = array('edit', 'history', 'watch');
+            foreach(array_diff_key($this->data['content_actions'], array_flip( $admin_sidebar_actions )) as $key => $tab) {
+              # echo "KEY($key)"; # Uncomment to show action names
+              # OSBRIDGE: Skip unwanted actions
+              if (! in_array($key, $include_content_actions)) continue;
+              echo '
+                <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
+              if( $tab['class'] ) {
+                echo ' class="'.htmlspecialchars($tab['class']).'"';
+              }
+              echo'><a href="'.htmlspecialchars($tab['href']).'"';
+              # We don't want to give the watch tab an accesskey if the
+              # page is being edited, because that conflicts with the
+              # accesskey on the watch checkbox.  We also don't want to
+              # give the edit tab an accesskey, because that's fairly su-
+              # perfluous and conflicts with an accesskey (Ctrl-E) often
+              # used for editing in Safari.
+              if( in_array( $action, array( 'edit', 'submit' ) )
+                   && in_array( $key, array( 'edit', 'watch', 'unwatch' ))) {
+                echo $skin->tooltip( "ca-$key" );
+              } else {
+                echo $skin->tooltipAndAccesskey( "ca-$key" );
+              }
+              echo '>'.htmlspecialchars($tab['text']).'</a></li>';
+            } ?>
+          </ul>
+        </div>
+
+        <!-- page content -->
         <h1 id="firstHeading" class="firstHeading"><?php $this->data['displaytitle']!=""?$this->html('title'):$this->text('title') ?></h1>
         <div id="bodyContent">
           <h3 id="siteSub"><?php $this->msg('tagline') ?></h3>
