@@ -315,8 +315,15 @@ class OSBridgeTemplate extends QuickTemplate {
   pageTracker._trackPageview();
 </script>
 
-<script src="http://static.getclicky.com/79611.js" type="text/javascript"></script>
-<noscript><p><img alt="Clicky" width="1" height="1" src="http://static.getclicky.com/79611-db10.gif" /></p></noscript>
+<script type="text/javascript">
+    // Defer loading "getclicky" till after the page has loaded, because it's external and slow.
+    $(document).ready(function () {
+        var element = document.createElement("script");
+        element.src = "http://static.getclicky.com/79611.js";
+        element.type = "text/javascript";
+        document.getElementsByTagName("head")[0].appendChild(element);
+    });
+</script>
 
 </body></html>
 <?php
