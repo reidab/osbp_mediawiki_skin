@@ -120,62 +120,39 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
  class="mediawiki <?php $this->text('dir') ?> <?php $this->text('pageclass') ?> <?php $this->text('skinnameclass') ?>">
   <div id="wrapper">
-    <div id="header">
+    <!-- #header_fragment BEGIN -->
+    <?php require_once 'shared_fragments.php'; ?>
+    <?php require_shared_fragment('header_current'); ?>
+    <!-- #header_fragment END -->
+
+    <div id="subnav" class='navbar'>
       <div class='inner_container'>
-        <h1 id="site-title"><span><a href='/'>Open Source Bridge</a></span></h1>
-        <div id="site-description">
-          <h2>The conference for open source citizens</h2>
-          <p id='conference-date-location'>June 17&ndash;19, 2009 <span class='separator'>|</span> Portland, Oregon</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="access">
-      <div class="skip-link">
-        <a href="#content" title="Skip to content">Skip to content</a>
-      </div>
-
-      <div id="menu">
+        <h2>Attendee Wiki</h2>
+        <?php global $admin_sidebar_actions; ?>
         <ul>
-          <li id="menu_first_item"><a href='/about/' title='About' class=''>About</a></li>
-          <li><a href='/attend/' title='Attend' class=''>Attend</a></li>
-          <li><a href='/sessions/' title='Sessions' class=''>Sessions</a></li>
-          <li><a href="/volunteer/" title="Volunteer">Get Involved</a></li>
-          <li><a href="/sponsors/" title="Sponsors">Sponsors</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li class="current_page_item"><a href="/wiki/">Wiki</a></li>
+          <?php
+          foreach(array_diff_key($this->data['content_actions'], array_flip( $admin_sidebar_actions )) as $key => $tab) {
+            echo '
+              <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
+            if( $tab['class'] ) {
+              echo ' class="'.htmlspecialchars($tab['class']).'"';
+            }
+            echo'><a href="'.htmlspecialchars($tab['href']).'"';
+            # We don't want to give the watch tab an accesskey if the
+            # page is being edited, because that conflicts with the
+            # accesskey on the watch checkbox.  We also don't want to
+            # give the edit tab an accesskey, because that's fairly su-
+            # perfluous and conflicts with an accesskey (Ctrl-E) often
+            # used for editing in Safari.
+            if( in_array( $action, array( 'edit', 'submit' ) )
+                 && in_array( $key, array( 'edit', 'watch', 'unwatch' ))) {
+              echo $skin->tooltip( "ca-$key" );
+            } else {
+              echo $skin->tooltipAndAccesskey( "ca-$key" );
+            }
+            echo '>'.htmlspecialchars($tab['text']).'</a></li>';
+          } ?>
         </ul>
-      </div>
-
-      <div id="subnav" class='navbar'>
-        <div class='inner_container'>
-          <h2>Attendee Wiki</h2>
-          <?php global $admin_sidebar_actions; ?>
-          <ul>
-            <?php
-            foreach(array_diff_key($this->data['content_actions'], array_flip( $admin_sidebar_actions )) as $key => $tab) {
-              echo '
-                <li id="' . Sanitizer::escapeId( "ca-$key" ) . '"';
-              if( $tab['class'] ) {
-                echo ' class="'.htmlspecialchars($tab['class']).'"';
-              }
-              echo'><a href="'.htmlspecialchars($tab['href']).'"';
-              # We don't want to give the watch tab an accesskey if the
-              # page is being edited, because that conflicts with the
-              # accesskey on the watch checkbox.  We also don't want to
-              # give the edit tab an accesskey, because that's fairly su-
-              # perfluous and conflicts with an accesskey (Ctrl-E) often
-              # used for editing in Safari.
-              if( in_array( $action, array( 'edit', 'submit' ) )
-                   && in_array( $key, array( 'edit', 'watch', 'unwatch' ))) {
-                echo $skin->tooltip( "ca-$key" );
-              } else {
-                echo $skin->tooltipAndAccesskey( "ca-$key" );
-              }
-              echo '>'.htmlspecialchars($tab['text']).'</a></li>';
-            } ?>
-          </ul>
-        </div>
       </div>
     </div>
     <div id="container">
