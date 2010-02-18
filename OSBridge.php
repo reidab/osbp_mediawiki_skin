@@ -186,8 +186,19 @@ class OSBridgeTemplate extends QuickTemplate {
         </div>
       </div>
       <div class='sidebar'>
-        <!-- User profile and actions -->
         <ul class="xoxo">
+<?php
+          # OSBRIDGE: Display navigation here
+          $sidebar = $this->data['sidebar'];
+          foreach ($sidebar as $boxName => $cont) {
+            if ( $boxName == 'navigation') {
+              $this->customBox( $boxName, $cont );
+            } else {
+              continue;
+            }
+          }
+?>
+          <!-- User profile and actions -->
           <li class="portlet" id="p-personal">
             <h3><?php $this->msg('personaltools') ?></h3>
             <ul>
@@ -254,8 +265,10 @@ class OSBridgeTemplate extends QuickTemplate {
               continue;
               $this->toolbox();
             } elseif ( $boxName == 'LANGUAGES' ) {
-              continue;
+              continue; # OSBRIDGE: Never display languages.
               $this->languageBox();
+            } elseif ( $boxName == 'navigation') {
+              continue; # OSBRIDGE: We'll display the navigation elsewhere
             } else {
               $this->customBox( $boxName, $cont );
             }
