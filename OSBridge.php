@@ -375,10 +375,11 @@ class OSBridgeTemplate extends QuickTemplate {
         ?>"<?php echo $this->skin->tooltipAndAccesskey('t-print') ?>><?php $this->msg('printableversion') ?></a></li><?php
     }
 
-    if(!empty($this->data['nav_urls']['permalink']['href'])) { ?>
+    # OSBRIDGE: Never show "Permanent link"
+    if(false and !empty($this->data['nav_urls']['permalink']['href'])) { ?>
         <li id="t-permalink"><a href="<?php echo htmlspecialchars($this->data['nav_urls']['permalink']['href'])
         ?>"<?php echo $this->skin->tooltipAndAccesskey('t-permalink') ?>><?php $this->msg('permalink') ?></a></li><?php
-    } elseif ($this->data['nav_urls']['permalink']['href'] === '') { ?>
+    } elseif (false and $this->data['nav_urls']['permalink']['href'] === '') { ?>
         <li id="t-ispermalink"<?php echo $this->skin->tooltip('t-ispermalink') ?>><?php $this->msg('permalink') ?></li><?php
     }
 
