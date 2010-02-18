@@ -115,6 +115,51 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php }
     if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
     <script src="<?php echo $this->text('stylepath'); ?>/osbridge/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+      /* FIXME: These evil CSS hacks to make this draft of the skin look intelligible to others, please reimplement */
+      div.sidebar h3 {
+        margin-top: 1em;
+        margin-bottom: 0.25em;
+      }
+
+      #p-personal h3 {
+        display: block;
+      }
+      
+      #p-personal ul {
+        text-transform: none;
+      }
+
+      #p-personal li {
+        list-style: disc;
+        text-decoration: underline;
+      }
+
+      li#pt-userpage,
+      li#pt-anonuserpage,
+      li#pt-login {
+        background: none;
+        padding-left: 0;
+        margin-left: 0;
+      }
+
+      #content-actions li,
+      #content-actions li a {
+        display: inline;
+        list-style: disc;
+        padding: 0.25em;
+        margin: 0px;
+      }
+      #content-actions li a {
+        text-decoration: none;
+        border: 1px solid #BEBEBE;
+        background: #EDEEEF;
+      }
+      #content-actions ul {
+        float: right;
+        margin: 1em 1em 0 0;
+      }
+    </style>
   </head>
 <body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
