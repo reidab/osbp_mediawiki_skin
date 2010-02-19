@@ -1338,3 +1338,63 @@ div#mw-search-interwiki-caption {
 .os-suggest {
 	font-size: 127%;
 }
+
+
+
+div.sidebar h3 {
+  margin-top: 1em;
+  margin-bottom: 0.25em;
+}
+
+#p-personal h3 {
+  display: block;
+}
+
+#p-personal ul {
+  text-transform: none;
+}
+
+#p-personal li {
+  list-style: disc;
+  text-decoration: underline;
+}
+
+li#pt-userpage,
+li#pt-anonuserpage,
+li#pt-login {
+  background: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#content-actions li,
+#content-actions li a {
+  display: inline;
+  list-style: disc;
+  padding: 0.25em;
+  margin: 0px;
+}
+#content-actions li a {
+  text-decoration: none;
+  border: 1px solid #BEBEBE;
+  background: #EDEEEF;
+}
+#content-actions {
+  float: right;
+  margin: 3.5em 0 0 0;
+}
+
+#content .page_title {
+  border: none;
+}
+
+.sidebar #p-navigation h3,
+.sidebar #personal-tools h3 {
+  display: none;
+}
+
+#pt-userpage {
+ color: #222;
+ font-weight: bold;
+ font-size: 1.2em;
+}

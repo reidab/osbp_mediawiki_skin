@@ -115,51 +115,11 @@ class OSBridgeTemplate extends QuickTemplate {
 <?php }
     if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
     <script src="<?php echo $this->text('stylepath'); ?>/osbridge/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <style type="text/css">
-      /* FIXME: These evil CSS hacks to make this draft of the skin look intelligible to others, please reimplement */
-      div.sidebar h3 {
-        margin-top: 1em;
-        margin-bottom: 0.25em;
-      }
 
-      #p-personal h3 {
-        display: block;
-      }
-      
-      #p-personal ul {
-        text-transform: none;
-      }
+    <style type="text/css" media="screen">
 
-      #p-personal li {
-        list-style: disc;
-        text-decoration: underline;
-      }
-
-      li#pt-userpage,
-      li#pt-anonuserpage,
-      li#pt-login {
-        background: none;
-        padding-left: 0;
-        margin-left: 0;
-      }
-
-      #content-actions li,
-      #content-actions li a {
-        display: inline;
-        list-style: disc;
-        padding: 0.25em;
-        margin: 0px;
-      }
-      #content-actions li a {
-        text-decoration: none;
-        border: 1px solid #BEBEBE;
-        background: #EDEEEF;
-      }
-      #content-actions ul {
-        float: right;
-        margin: 1em 1em 0 0;
-      }
     </style>
+
   </head>
 <body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
@@ -170,12 +130,10 @@ class OSBridgeTemplate extends QuickTemplate {
     <?php require_shared_fragment('header_current'); ?>
     <!-- #header_fragment END -->
 
-    <div id="subnav" class='navbar'>
-      <div class='inner_container'>
+    <div id="container">
+      <div class='section_title'>
         <h2>Attendee Wiki</h2>
       </div>
-    </div>
-    <div id="container">
       <div id="content">
         <a name="top" id="top"></a>
         <?php if($this->data['sitenotice']) { ?><div id="siteNotice"><?php $this->html('sitenotice') ?></div><?php } ?>
@@ -215,7 +173,7 @@ class OSBridgeTemplate extends QuickTemplate {
         </div>
 
         <!-- page content -->
-        <h1 id="firstHeading" class="firstHeading"><?php $this->data['displaytitle']!=""?$this->html('title'):$this->text('title') ?></h1>
+        <h2 class="page_title"><?php $this->data['displaytitle']!=""?$this->html('title'):$this->text('title') ?></h2>
         <div id="bodyContent">
           <h3 id="siteSub"><?php $this->msg('tagline') ?></h3>
           <div id="contentSub"><?php $this->html('subtitle') ?></div>
@@ -232,6 +190,9 @@ class OSBridgeTemplate extends QuickTemplate {
       </div>
       <div class='sidebar'>
         <ul class="xoxo">
+
+          <!-- User profile and actions -->
+
 <?php
           # OSBRIDGE: Display navigation here
           $sidebar = $this->data['sidebar'];
@@ -243,9 +204,12 @@ class OSBridgeTemplate extends QuickTemplate {
             }
           }
 ?>
-          <!-- User profile and actions -->
-          <li class="portlet" id="p-personal">
-            <h3><?php $this->msg('personaltools') ?></h3>
+
+
+      <li class="portlet" id='personal-tools'>
+        <div id='account-box'>
+          <h3><?php $this->msg('personaltools') ?></h3>
+          <div class='user_actions'>
             <ul>
 <?php         foreach($this->data['personal_urls'] as $key => $item) { ?>
                 <li id="<?php echo Sanitizer::escapeId( "pt-$key" ) ?>"<?php
@@ -256,7 +220,11 @@ class OSBridgeTemplate extends QuickTemplate {
                 echo htmlspecialchars($item['text']) ?></a></li>
 <?php         } ?>
             </ul>
-          </li>
+          </div>
+        </div>
+      </li>
+
+
           <?php
           $admin_sidebar_menu = array_intersect_key($this->data['content_actions'], array_flip( $admin_sidebar_actions ));
 
