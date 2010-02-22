@@ -127,7 +127,14 @@ class OSBridgeTemplate extends QuickTemplate {
   <div id="wrapper">
     <!-- #header_fragment BEGIN -->
     <?php require_once 'shared_fragments.php'; ?>
-    <?php require_shared_fragment('header_current'); ?>
+    <?php
+      global $OSBRIDGE_EVENT_SLUG;
+      if ($OSBRIDGE_EVENT_SLUG) {
+        require_shared_fragment("header_{$OSBRIDGE_EVENT_SLUG}");
+      } else {
+        require_shared_fragment('header_current');
+      }
+   ?>
     <!-- #header_fragment END -->
 
     <div id="container">
